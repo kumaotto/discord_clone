@@ -8,7 +8,11 @@ module.exports = {
       },
       backgroundColor: {
         'sidebar': '#212226',
-        'side-menu': '#303136'
+        'side-menu': '#303136',
+        'chat': '#383943',
+      },
+      fontFamily: {
+        body: ['Noto Sans JP', 'sans-serif']
       }
     },
   },

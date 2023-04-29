@@ -19,7 +19,7 @@ const Sidebar = () => {
           </div>
         </div>
 
-        <div className="bg-side-menu w-72 flex flex-col justify-between">
+        <div className="bg-side-menu w-72 flex flex-col justify-between flex-grow">
           <div>
             <div className='text-white flex items-center px-5 py-5 justify-between'>
               <h3>Discord</h3>
