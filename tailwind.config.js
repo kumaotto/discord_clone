@@ -8,8 +8,9 @@ module.exports = {
       },
       backgroundColor: {
         'sidebar': '#212226',
-        'side-menu': '#303136',
-        'chat': '#383943',
+        'side-menu': '#2C2D30',
+        'chat': '#323338',
+        'chat-input': '#3F434C'
       },
       fontFamily: {
         body: ['Noto Sans JP', 'sans-serif']

@@ -10,8 +10,8 @@ const ChatHeader = () => {
   return (
     <div className='flex items-center justify-between pt-2.5'>
       <div className='pl-4'>
-        <h3 className='text-white'>
-          <span className='text-gray-400 pr-1'>#</span>
+        <h3 className='text-white font-bold text-lg'>
+          <span className='text-gray-400 pr-1.5 text-sm'>#</span>
           Text
         </h3>
       </div>

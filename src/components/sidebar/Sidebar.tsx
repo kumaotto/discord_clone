@@ -10,8 +10,8 @@ const Sidebar = () => {
   return (
     <div className='flex'>
       <div className='flex flex-0.35 h-screen'>
-        <div className='flex flex-col items-center px-2 py-4 w-20 bg-sidebar'>
-          <div className='rounded-full bg-neutral-400 mb-4'>
+        <div className='flex flex-col items-center px-2 py-4 w-20 bg-neutral-900'>
+          <div className='rounded-full mb-4'>
             <img src="./logo192.png" className='' alt="" />
           </div>
           <div className='rounded-full bg-neutral-400'>
