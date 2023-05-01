@@ -1,8 +1,11 @@
 import React from 'react'
+import ChatHeader from './ChatHeader'
 
 const Chat = () => {
   return (
-    <div className='flex flex-col flex-grow bg-chat'>Chataaaaa</div>
+    <div className='flex flex-col flex-grow bg-chat'>
+      <ChatHeader />
+    </div>
   )
 }
 
