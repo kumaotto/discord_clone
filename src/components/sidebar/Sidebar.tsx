@@ -5,8 +5,13 @@ import SidebarChannel from './SidebarChannel';
 import MicIcon from '@mui/icons-material/Mic';
 import HeadphonesIcon from '@mui/icons-material/Headphones';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { auth } from '../../firebase';
+import { useAppSelector } from '../../app/hooks';
 
 const Sidebar = () => {
+
+  const user = useAppSelector(state => state.user)
+
   return (
     <div className='flex'>
       <div className='flex flex-0.35 h-screen'>
@@ -52,15 +57,15 @@ const Sidebar = () => {
             <div className='flex bg-neutral-800 text-white justify-between items-center'>
               <div className='flex items-center p-2'>
                 <div className='w-12 h-12 rounded-full bg-white overflow-hidden'>
-                  <img className='w-12 h-12 object-contain' src="./icon1.png" alt="" />
+                  <img className='w-12 h-12 object-contain' src={user?.image} alt="userIcon" onClick={() => auth.signOut()} />
                 </div>
                 <div className='h-fit px-2'>
-                  <h4 className='font-bold leading-4'>Hand</h4>
-                  <p className='text-gray-400 leading-4'>#111</p>
+                  <h4 className='font-bold leading-4 line-clamp-1'>{user?.displayName}</h4>
+                  <p className='text-gray-400 leading-4'>#{user?.uid.substring(0, 4)}</p>
                 </div>
               </div>
 
-              <div className='p-4'>
+              <div className='p-2'>
                 <MicIcon />
                 <HeadphonesIcon className='ml-2' />
                 <SettingsIcon className='ml-2' />
