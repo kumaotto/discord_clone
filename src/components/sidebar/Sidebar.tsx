@@ -4,14 +4,25 @@ import SidebarChannel from './SidebarChannel';
 import MicIcon from '@mui/icons-material/Mic';
 import HeadphonesIcon from '@mui/icons-material/Headphones';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { auth } from '../../firebase';
+import { auth, db } from '../../firebase';
 import { useAppSelector } from '../../app/hooks';
 import useCollection from '../../hooks/useCollection';
+import { addDoc, collection } from 'firebase/firestore';
 
 const Sidebar = () => {
 
-  const user = useAppSelector(state => state.user)
+  const user = useAppSelector(state => state.user.user)
   const { documents: channels } = useCollection('channels')
+
+  const addChannel = async () => {
+    let channelName: string | null = prompt('create a new channel')
+  
+    if (channelName) {
+      await addDoc(collection(db, "channels"), {
+        channelName: channelName
+      });
+    }
+  }
 
   return (
     <div className='flex'>
@@ -36,9 +47,9 @@ const Sidebar = () => {
               <div className='flex justify-between mt-1 text-white items-center'>
                 <div className='flex'>
                   <ExpandMoreIcon />
-                  <h4>プログラミングチャンネル</h4>
+                  <h4>Channels</h4>
                 </div>
-                <AddIcon className='cursor-pointer' />
+                <AddIcon className='cursor-pointer' onClick={addChannel} />
               </div>
 
               <div>

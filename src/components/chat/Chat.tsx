@@ -6,11 +6,16 @@ import GifBoxIcon from '@mui/icons-material/GifBox';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import ChatMessage from './ChatMessage';
+import { useAppSelector } from '../../app/hooks';
 
 const Chat = () => {
+
+  const channelName = useAppSelector(state => state.channel.channelName);
+  console.log(channelName)
+
   return (
     <div className='flex flex-col flex-grow bg-chat'>
-      <ChatHeader />
+      <ChatHeader channelName={channelName} />
 
       <div className='flex-grow'>
         <ChatMessage />

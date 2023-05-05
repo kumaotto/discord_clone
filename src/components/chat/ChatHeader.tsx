@@ -6,13 +6,20 @@ import SearchIcon from '@mui/icons-material/Search';
 import SendIcon from '@mui/icons-material/Send';
 import HelpIcon from '@mui/icons-material/Help';
 
-const ChatHeader = () => {
+type Props = {
+  channelName: string | null;
+}
+
+const ChatHeader = (props: Props) => {
+
+  const { channelName } = props;
+
   return (
     <div className='flex items-center justify-between pt-2.5'>
       <div className='pl-4'>
         <h3 className='text-white font-bold text-lg'>
           <span className='text-gray-400 pr-1.5 text-sm'>#</span>
-          Text
+          {channelName}
         </h3>
       </div>
 

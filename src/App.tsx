@@ -10,7 +10,7 @@ import { ErrorFallBack } from './utils/ErrorFallback';
 
 function App() {
 
-  const user = useAppSelector((state) => state.user)
+  const user = useAppSelector((state) => state.user.user)
   const dispatch = useAppDispatch();
 
   useEffect(() => {
