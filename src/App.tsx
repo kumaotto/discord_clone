@@ -5,6 +5,8 @@ import Login from './components/Login/Login';
 import { useAppDispatch, useAppSelector } from './app/hooks';
 import { auth } from './firebase';
 import { login, logout } from './features/userSlice';
+import { ErrorBoundary } from 'react-error-boundary'
+import { ErrorFallBack } from './utils/ErrorFallback';
 
 function App() {
 
@@ -31,8 +33,10 @@ function App() {
     <div className="flex">
       {user ? (
         <>
-        <Sidebar />
-        <Chat />
+          <ErrorBoundary FallbackComponent={ErrorFallBack}>
+            <Sidebar />
+            <Chat />
+          </ErrorBoundary>
         </>
       ) : (
         <>
