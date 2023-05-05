@@ -7,7 +7,7 @@ import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import ChatMessage from './ChatMessage';
 import { useAppSelector } from '../../app/hooks';
-import { CollectionReference, DocumentData, Timestamp, addDoc, collection, onSnapshot, serverTimestamp } from 'firebase/firestore';
+import { CollectionReference, DocumentData, Timestamp, addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase';
 
 interface Messages {
@@ -31,8 +31,9 @@ const Chat = () => {
 
   useEffect(() => {
     let collectionRef = collection(db, "channels", String(channelId), "messages");
-    
-    onSnapshot(collectionRef, (snapshot) => {
+    const collectionRefOrder = query(collectionRef, orderBy("timestamp", "asc"));
+
+    onSnapshot(collectionRefOrder, (snapshot) => {
       let result: Messages[] = [];
       snapshot.docs.forEach((doc) => {
         result.push({
@@ -42,7 +43,6 @@ const Chat = () => {
         })
       })
       setMessages(result)
-      console.log(result)
     })
   }, [channelId]);
 
@@ -61,6 +61,7 @@ const Chat = () => {
       timestamp: serverTimestamp(),
       user: user,
     })
+    setInputText("")
   }
 
   return (
@@ -87,6 +88,7 @@ const Chat = () => {
             type="text"
             placeholder='#Textへメッセージを送信'
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInputText(e.target.value)}
+            value={inputText}
           />
           <button
             className='hidden'
