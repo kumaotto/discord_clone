@@ -65,10 +65,10 @@ const Chat = () => {
   }
 
   return (
-    <div className='flex flex-col flex-grow bg-chat'>
+    <div className='flex flex-col flex-grow bg-chat h-screen'>
       <ChatHeader channelName={channelName} />
 
-      <div className='flex-grow'>
+      <div className='flex-grow overflow-y-scroll'>
         {/* TODO: messageIdをkeyにする */}
         {messages.map((message, index) => (
           <ChatMessage
