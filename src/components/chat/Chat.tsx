@@ -68,11 +68,15 @@ const Chat = () => {
       <ChatHeader channelName={channelName} />
 
       <div className='flex-grow'>
-        <ChatMessage />
-        <ChatMessage />
-        <ChatMessage />
-        <ChatMessage />
-        <ChatMessage />
+        {/* TODO: messageIdをkeyにする */}
+        {messages.map((message, index) => (
+          <ChatMessage
+            key={index}
+            message={message.message}
+            timestamp={message.timestamp}
+            user={message.user}
+          />
+        ))}
       </div>
 
       <div className='flex item-center justify-between p-4 bg-chat-input rounded-md m-5 text-gray-200'>
