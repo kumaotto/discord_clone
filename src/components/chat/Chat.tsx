@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import ChatHeader from './ChatHeader'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
@@ -7,46 +7,21 @@ import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import ChatMessage from './ChatMessage';
 import { useAppSelector } from '../../app/hooks';
-import { CollectionReference, DocumentData, Timestamp, addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from 'firebase/firestore';
+import { CollectionReference, DocumentData, addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { db } from '../../firebase';
-
-interface Messages {
-  timestamp: Timestamp;
-  message: string;
-  user: {
-    uid: string;
-    image: string;
-    email: string;
-    displayName: string;
-  }
-}
+import useSubCollection from '../../hooks/useSubCollection';
 
 const Chat = () => {
 
   const [inputText, setInputText] = useState<string>("");
-  const [messages, setMessages] = useState<Messages[]>([]);
-  const channelName = useAppSelector(state => state.channel.channelName);
   const channelId = useAppSelector(state => state.channel.channelId)
+  const channelName = useAppSelector(state => state.channel.channelName);
   const user = useAppSelector(state => state.user.user)
+  const {subDocuments: messages} = useSubCollection("channels", "messages");
 
-  useEffect(() => {
-    let collectionRef = collection(db, "channels", String(channelId), "messages");
-    const collectionRefOrder = query(collectionRef, orderBy("timestamp", "asc"));
-
-    onSnapshot(collectionRefOrder, (snapshot) => {
-      let result: Messages[] = [];
-      snapshot.docs.forEach((doc) => {
-        result.push({
-          timestamp: doc.data().timestamp,
-          message: doc.data().message,
-          user: doc.data().user,
-        })
-      })
-      setMessages(result)
-    })
-  }, [channelId]);
-
-  const sendMessage = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const sendMessage = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     e.preventDefault();
 
     const collectionRef: CollectionReference<DocumentData> = collection(

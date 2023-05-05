@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { InitialChannelState, InitialUserState } from "../Tyeps";
+import { InitialChannelState } from "../Tyeps";
 
 const initialState: InitialChannelState = {
   channelId: null,
